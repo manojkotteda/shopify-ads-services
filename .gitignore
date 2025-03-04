@@ -1,2 +1,5 @@
 __pycache__/main.cpython-311.pyc
 routes/__pycache__/ads.cpython-311.pyc
+__pycache__/scraper.cpython-311.pyc
+__pycache__/models.cpython-311.pyc
+routes/__pycache__/products.cpython-311.pyc

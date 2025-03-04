@@ -7,6 +7,7 @@ class Product(BaseModel):
     currency: str
     description: str
     image: str
+    vendor:str
     url: HttpUrl
 
 class SaveProductRequest(BaseModel):

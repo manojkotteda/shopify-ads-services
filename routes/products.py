@@ -1,15 +1,15 @@
 # routes/products.py
 from fastapi import APIRouter, Query, HTTPException
 from database import save_product, get_products
-from scraper import scrape_shopify_product
+from scraper import scrape_shopify_products
 from models import Product, SaveProductRequest
 
 router = APIRouter()
 
-@router.get("/products", response_model=Product)
+@router.get("/products", response_model=list[Product])
 def get_product_details(url: str = Query(..., description="Shopify product URL")):
     """Retrieves product details from a given Shopify product URL."""
-    return scrape_shopify_product(url)
+    return scrape_shopify_products(url)
 
 @router.post("/save-product")
 def save_product_api(request: SaveProductRequest):
