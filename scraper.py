@@ -1,13 +1,22 @@
 import requests
+from bs4 import BeautifulSoup
 from fastapi import HTTPException
 import logging
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("shopify_scraper")
 
+def clean_html(raw_html):
+    """
+    Converts raw HTML into clean, human-readable text.
+    """
+    soup = BeautifulSoup(raw_html, "html.parser")
+    return soup.get_text(separator=" ").strip()
+
 def scrape_shopify_products(shopify_store_url: str):
     """
     Scrapes multiple product details from a Shopify store using its JSON API.
+    Cleans up descriptions for readability.
     """
     try:
         # Construct the API endpoint URL
@@ -28,7 +37,8 @@ def scrape_shopify_products(shopify_store_url: str):
         for product in data["products"]:
             # Extract basic product details
             title = product.get("title", "N/A")
-            description = product.get("body_html", "N/A")
+            raw_description = product.get("body_html", "N/A")
+            clean_description = clean_html(raw_description)  # Convert to plain text
             handle = product.get("handle", "N/A")
             product_url = f"{shopify_store_url.rstrip('/')}/products/{handle}"
             vendor = product.get("vendor", "N/A")
@@ -43,7 +53,7 @@ def scrape_shopify_products(shopify_store_url: str):
 
             products.append({
                 "title": title,
-                "description": description,
+                "description": clean_description,  # ✅ Cleaned description
                 "price": price,
                 "currency": "USD",  # Shopify stores generally use USD
                 "image": image_url,
