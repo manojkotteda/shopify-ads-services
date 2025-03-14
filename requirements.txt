@@ -8,3 +8,4 @@ sqlalchemy==2.0.27  # If you plan to use SQL in the future
 uuid==1.30  # UUID support (built-in, but useful for legacy compatibility)
 watchfiles==0.21.0  # Required for FastAPI auto-reload
 firebase_admin
+gunicorn
