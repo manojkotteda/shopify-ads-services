@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
-from auth import verify_firebase_token
-from scraper import scrape_shopify_products
-from database import save_product, get_products
-from models import SaveProductRequest
+from src.auth import verify_firebase_token
+from src.scraper import scrape_shopify_products
+from src.database import save_product, get_products
+from src.models import SaveProductRequest
 
 router = APIRouter()
 

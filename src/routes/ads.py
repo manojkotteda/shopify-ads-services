@@ -1,6 +1,6 @@
 # routes/ads.py
 from fastapi import APIRouter
-from models import AdRequest
+from src.models import AdRequest
 import logging
 
 router = APIRouter()

@@ -1,7 +1,7 @@
 # main.py
 from fastapi import FastAPI
-from routes import products, ads
-from middleware import setup_cors
+from src.routes import products, ads
+from src.middleware import setup_cors
 
 app = FastAPI()
 
